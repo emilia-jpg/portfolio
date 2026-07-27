@@ -1,0 +1,592 @@
+/* ---------- reset & base ---------- */
+:root {
+  --credit-gap: 0.75rem;   /* space above/below a photo-credit line — change here to adjust everywhere */
+  --gallery-gap: 1.375rem; /* space between gallery images/rows on project detail pages */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #000;
+  background: #fff;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ---------- shared ---------- */
+
+.section-padding {
+  padding-left: clamp(1.5rem, 2.9vw, 3.125rem);
+  padding-right: clamp(1.5rem, 2.9vw, 3.125rem);
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  /* guarantees breathing room below the nav before the next section,
+     even if narrower text wrapping makes the hero grow past 100vh */
+  padding-bottom: clamp(3rem, 8vh, 6rem);
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #fff 0%, rgba(255, 255, 255, 0) 65%);
+}
+
+.hero__content {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1.25rem, 2.3vw, 2.5rem);
+  max-width: 1728px;
+  margin: 0 auto;
+  padding: clamp(6rem, 20vh, 10rem) clamp(1.5rem, 12vw, 13.4rem) clamp(2rem, 4vh, 3rem) clamp(1.5rem, 12.4vw, 13.4rem);
+}
+
+.hero__photo {
+  flex: 0 0 clamp(9rem, 18vw, 19.3rem);
+  aspect-ratio: 309 / 372;
+  background: #d9d9d9;
+  overflow: hidden;
+}
+
+.hero__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__intro {
+  flex: 1 1 40rem;
+  max-width: 40rem;
+  padding-top: clamp(0.5rem, 1.5vw, 1.5rem);
+}
+
+.hero__intro h1 {
+  font-size: clamp(1.75rem, 2.45vw, 2.625rem);
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+
+.hero__intro p {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.hero__nav {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.75rem;
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+}
+
+.hero__nav a {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+
+.hero__nav a:hover {
+  opacity: 0.6;
+}
+
+/* ---------- projects ---------- */
+
+.projects {
+  display: flex;
+  flex-direction: column;
+}
+
+.project {
+  position: relative;
+  min-height: 100vh;
+}
+
+.project__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(1.5rem, 2.9vw, 3.125rem);
+  padding-bottom: clamp(2rem, 6vh, 4.5rem);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 55%);
+  color: #fff;
+}
+
+.project__text {
+  /* while the button sits absolutely on the right (desktop/tablet), cap the text
+     so it can never grow into it — 19.4rem button + 2rem breathing room */
+  max-width: min(40rem, calc(100% - 21.4rem));
+}
+
+.project__text h2 {
+  font-size: clamp(2.5rem, 6vw, 6.375rem);
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.project__text p {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.btn-outline {
+  position: absolute;
+  right: clamp(1.5rem, 2.9vw, 3.125rem);
+  bottom: clamp(2rem, 6vh, 4.5rem);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 19.4rem;
+  max-width: calc(100% - 3rem);
+  padding: 1.1rem 1rem;
+  border: 2px solid #fff;
+  border-radius: 40px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-outline:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* ---------- arrow icon ---------- */
+
+.icon-arrow {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.icon-arrow--left {
+  transform: rotate(180deg);
+}
+
+.icon-arrow--down {
+  transform: rotate(90deg);
+}
+
+/* ---------- photo credit (dark/overlay contexts: hero cards, detail banner) ---------- */
+
+.photo-credit {
+  display: block;
+  margin: var(--credit-gap) 0;
+  text-align: left;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+}
+
+/* ---------- contact ---------- */
+
+.contact {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.5rem;
+  padding: 6rem 1.5rem;
+}
+
+.contact h2 {
+  font-size: clamp(1.75rem, 2.45vw, 2.625rem);
+  font-weight: 600;
+  line-height: 1.2;
+  max-width: 40rem;
+}
+
+.contact__email {
+  font-size: clamp(1.25rem, 1.75vw, 1.875rem);
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+
+.contact__email:hover {
+  opacity: 0.6;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 900px) {
+  .hero {
+    padding-bottom: clamp(2rem, 6vh, 4rem);
+  }
+
+  .hero__content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero__photo {
+    flex: 0 0 auto;
+    width: min(92vw, 22rem);
+    order: 2;
+    align-self: center;
+    margin-top: 0;
+  }
+
+  .hero__intro {
+    order: 1;
+    margin-top: 0;
+  }
+
+  .hero__nav {
+    margin-top: 1.25rem;
+  }
+
+  .btn-outline {
+    position: static;
+    margin-top: 1.5rem;
+    width: 100%;
+    max-width: 19.4rem;
+  }
+
+  /* button now stacks below the text instead of sitting beside it, so it no
+     longer needs to reserve horizontal space */
+  .project__text {
+    max-width: 40rem;
+  }
+
+  .project__overlay {
+    padding-bottom: 2.5rem;
+  }
+}
+
+/* ========================================================
+   PROJECT DETAIL PAGE
+   ======================================================== */
+
+.detail-banner {
+  position: relative;
+  width: 100%;
+}
+
+.detail-banner__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-banner__overlay {
+  position: relative;
+  min-height: clamp(18rem, 33vw, 35.9rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 4.5rem clamp(1.5rem, 12.4vw, 13.4rem) 2.5rem;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.05) 100%);
+  color: #fff;
+}
+
+.detail-banner__back {
+  position: absolute;
+  top: calc(2rem - 0.75rem);
+  left: calc(clamp(1.5rem, 12.4vw, 13.4rem) - 0.75rem);
+  z-index: 1;
+  padding: 0.75rem;
+  color: #fff;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.45));
+  transition: opacity 0.2s ease;
+}
+
+.detail-banner__back .icon-arrow {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.detail-banner__back:hover {
+  opacity: 0.7;
+}
+
+.detail-banner__overlay h1 {
+  font-size: clamp(2.25rem, 5.5vw, 6.375rem);
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+}
+
+.detail-banner__meta {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.5rem;
+}
+
+.detail-banner__credits p {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.detail-banner__credits strong {
+  font-weight: 700;
+}
+
+/* main content column */
+
+.detail {
+  max-width: 81.125rem; /* 1298px */
+  margin: 0 auto;
+  padding: clamp(3rem, 6vh, 4.5rem) clamp(1.5rem, 12.4vw, 13.4rem) 0;
+}
+
+.detail__intro {
+  max-width: 50.25rem; /* 804px */
+  margin-bottom: clamp(3rem, 6vh, 6.25rem);
+}
+
+.detail__intro p {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.detail__intro p + p {
+  margin-top: 1.5rem;
+}
+
+.detail__intro a {
+  text-decoration: underline;
+  transition: opacity 0.2s ease;
+}
+
+.detail__intro a:hover {
+  opacity: 0.6;
+}
+
+/* fixed gap between a gallery block (image or row) and the paragraph that follows it,
+   so a photo credit never sits flush against body copy */
+.detail__image + .detail__intro,
+.detail__row + .detail__intro {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.detail__image {
+  position: relative;
+  margin-bottom: var(--gallery-gap);
+}
+
+/* aspect-ratio lives on the img itself (not the figure) so a trailing
+   figcaption can never inflate or destabilize the image's height */
+.detail__image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.detail__image--tall img {
+  aspect-ratio: 1298 / 1623;
+}
+
+/* full column width, but landscape instead of portrait */
+.detail__image--landscape img {
+  aspect-ratio: 3 / 2;
+}
+
+.detail__image--centered {
+  max-width: 60.5rem; /* 968px */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.detail__image--centered img {
+  aspect-ratio: 968 / 546;
+}
+
+/* reusable embedded-video block (e.g. YouTube) — same slot/caption pattern as a photo */
+.detail__video {
+  max-width: 60.5rem; /* 968px, matches .detail__image--centered */
+  margin: 0 auto var(--gallery-gap);
+}
+
+.detail__video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+}
+
+.detail__video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.detail__row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gallery-gap);
+  margin-bottom: var(--gallery-gap);
+}
+
+.detail__row .detail__image {
+  margin-bottom: 0;
+}
+
+.detail__row--even .detail__image {
+  flex: 1 1 0%;
+}
+
+/* flex-grow set to the exact source pixel widths (not a rounded %) so
+   two images sharing a design height always compute to the same
+   rendered height, regardless of container width */
+.detail__row .detail__image--wide {
+  flex: 804 1 0%;
+}
+
+.detail__row .detail__image--wide img {
+  aspect-ratio: 804 / 574;
+}
+
+.detail__row .detail__image--narrow {
+  flex: 474 1 0%;
+}
+
+.detail__row .detail__image--narrow img {
+  aspect-ratio: 474 / 574;
+}
+
+.detail__image--portrait img {
+  aspect-ratio: 639 / 852;
+}
+
+/* light-background variant: gallery captions sit outside/below the photo, on white */
+.photo-credit--muted {
+  margin-top: var(--credit-gap);
+  margin-bottom: 0;
+  color: #00000075;
+  text-shadow: none;
+  font-size: 0.8rem;
+}
+
+/* dark outline button variant (for light backgrounds) */
+
+.btn-outline--dark {
+  position: static;
+  display: inline-flex;
+  border-color: #000;
+  color: #000;
+  width: auto;
+  padding: 0.9rem 1.75rem;
+}
+
+.btn-outline--dark:hover {
+  background: #000;
+  color: #fff;
+}
+
+.detail-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: 81.125rem;
+  margin: 200px auto clamp(3rem, 8vh, 6.5rem);
+  padding: 0 clamp(1.5rem, 12.4vw, 13.4rem);
+}
+
+.detail-footer__contact {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.detail-footer__contact a {
+  text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+  .detail__row {
+    flex-wrap: wrap;
+  }
+
+  .detail__row .detail__image--wide,
+  .detail__row .detail__image--narrow,
+  .detail__row--even .detail__image {
+    flex: 1 1 100%;
+  }
+
+  /* images (not captions or body text) break out to full screen width */
+  .detail__image img {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .detail-footer {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 50px;
+  }
+}
